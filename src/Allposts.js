@@ -1,19 +1,32 @@
 import React from 'react';
+import Post from './Post';
+import content from './database';
 
 class AllPosts extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            posts: []
+        }
+    }
+
+    componentDidMount(){
+        this.setState({posts:content});
+    }
+
     render(){
+        const posts = this.state.posts;
+        const content = posts.map((post) =>
+            <Post
+                key={post.id}
+                id={post.id}
+                post={post} />
+        );
+
         return(
             <div className="All-posts">
-                <div className="Post">
-                <h1 className="Title">My First Post</h1>
-                <div className="Post-meta">
-                    <span className="Date">Dec 25, 2019</span>
-                </div>
-                <div className="Post-content">
-                    <p>This is my post content!</p>
-                </div>
-                </div>
-            </div>
+                {content}
+            </div>                
         )
     }
 }
