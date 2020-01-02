@@ -23,18 +23,18 @@ class Editor extends React.Component {
     }
 
     handleSubmit(event) {
-        const post = {
+        let post = {
             title: this.state.title,
             content: this.state.content
         }
 
-        console.log(post);
+        this.props.onPostSubmit(post);
 
         this.setState({
             title: '',
             content: ''
         });
-        
+
         event.preventDefault();
     }
 
