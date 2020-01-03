@@ -8,15 +8,22 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: []
+      posts: [],
     };
 
+    this.handleClick = this.handleClick.bind(this);
     this.postSubmission = this.postSubmission.bind(this);
   }
 
 
   componentDidMount() {
     this.setState({ posts: content });
+  }
+
+  handleClick(event) {
+    this.setState(state => ({
+      showForm: !state.showForm
+    }));
   }
 
   postSubmission(post) {
@@ -26,17 +33,18 @@ class App extends React.Component {
     post['id'] = lastPost.id + 1;
 
     allposts.push(post);
-    console.log(post);
     this.setState({ posts: allposts });
   }
 
   render() {
+    const showForm = this.state.showForm;
     const posts = this.state.posts;
     const content = posts.map((post) =>
       <Post
         key={post.id}
         id={post.id}
-        post={post} />
+        post={post}
+        />
     );
   
   
@@ -45,7 +53,10 @@ class App extends React.Component {
       <header className="App-header">
         <h1>My Journal App</h1>
       </header>
-      <Editor onPostSubmit={this.postSubmission} />
+      <button onClick={this.handleClick}>+ New Post</button>
+      {showForm ?
+        <Editor onPostSubmit={this.postSubmission} /> :
+        '' }
       <div className="Blog">
         {content}
       </div> 

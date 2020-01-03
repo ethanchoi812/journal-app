@@ -5,7 +5,8 @@ class Editor extends React.Component {
         super(props);
         this.state = {
             title: '',
-            content: ''
+            content: '',
+            showForm: false
          };
 
         this.handleChange = this.handleChange.bind(this);
@@ -41,7 +42,6 @@ class Editor extends React.Component {
     render(){
         return(
             <form className="Editor" onSubmit={this.handleSubmit} >
-                <button>+ New Post</button>
                 <input 
                     name="title"
                     className="Title-editor"
