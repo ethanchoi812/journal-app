@@ -6,11 +6,29 @@ class Editor extends React.Component {
         this.state = {
             title: '',
             content: '',
-            showForm: false
+            id: 'unset',
          };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        let title = this.state.title;
+        let content = this.state.content;
+        let id = this.state.id;
+
+        if (this.props.post) {
+            title = this.props.post.title;
+            content = this.props.post.content;
+            id = this.props.post.id;
+
+            this.setState({
+                title: title,
+                content: content,
+                id: id
+            });
+        }
     }
 
     handleChange(event) {
@@ -26,20 +44,23 @@ class Editor extends React.Component {
     handleSubmit(event) {
         let post = {
             title: this.state.title,
-            content: this.state.content
+            content: this.state.content,
+            id: this.state.id
         }
 
         this.props.onPostSubmit(post);
 
         this.setState({
             title: '',
-            content: ''
+            content: '',
+            id: 'unset'
         });
 
         event.preventDefault();
     }
 
     render(){
+
         return(
             <form className="Editor" onSubmit={this.handleSubmit} >
                 <input 

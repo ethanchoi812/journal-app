@@ -7,14 +7,20 @@ class Post extends React.Component {
         super(props);
         this.state = { isEditOn: false };
 
-        // This binding is necessary to make `this` work in the callback
         this.handleClick = this.handleClick.bind(this);
+        this.handleSubmission = this.handleSubmission.bind(this);
     }
 
     handleClick(e) {
         this.setState(state => ({
             isEditOn: !state.isEditOn
         }));
+    }
+
+    handleSubmission(post){
+
+        this.props.onPostEdit(post);
+
     }
 
     render() {
@@ -24,7 +30,7 @@ class Post extends React.Component {
 
         return (
         <div className="Post">
-            {editOn ? <Editor /> :
+                {editOn ? <Editor post={post} onPostSubmit={this.handleSubmission} /> :
             (
             <div>
                 <h1 className="Title">{post.title}</h1>
@@ -41,7 +47,7 @@ class Post extends React.Component {
               className="Edit-post"
               onClick={this.handleClick}
               >
-                {editOn ? 'Done' : 'Edit'}
+                {editOn ? '' : 'Edit'}
             </span>
             </div>
         </div>

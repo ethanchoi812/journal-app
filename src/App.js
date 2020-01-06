@@ -9,6 +9,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       posts: [],
+      //showForm: false
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -30,13 +31,23 @@ class App extends React.Component {
     let allposts = this.state.posts;
     let lastPost = allposts[(allposts.length)-1];
 
-    post['id'] = lastPost.id + 1;
+    if (post['id'] === 'unset') {
 
-    allposts.push(post);
-    this.setState({ posts: allposts });
+      post['id'] = lastPost.id + 1;
+      allposts.push(post);
+
+    } else {
+      allposts.splice(post.id, 1, post);
+
+    }
+
+    this.setState({ 
+      posts: allposts,
+     });
   }
 
   render() {
+
     const showForm = this.state.showForm;
     const posts = this.state.posts;
     const content = posts.map((post) =>
@@ -44,6 +55,7 @@ class App extends React.Component {
         key={post.id}
         id={post.id}
         post={post}
+        onPostEdit={this.postSubmission}
         />
     );
   
