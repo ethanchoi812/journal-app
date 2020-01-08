@@ -30,7 +30,7 @@ class Post extends React.Component {
         const editOn = this.state.isEditOn;
 
         return (
-        <div className="Post">
+        <div className="Post-div">
                 {editOn ? <Editor post={post} onPostSubmit={this.handleSubmission} /> :
             (
             <div>

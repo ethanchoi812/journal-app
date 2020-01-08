@@ -69,8 +69,8 @@ class App extends React.Component {
     <div className="App">
       <header className="App-header">
         <h1>My Journal App</h1>
+        <button className="New-post-button" onClick={this.handleClick}>+ New Post</button>
       </header>
-      <button onClick={this.handleClick}>+ New Post</button>
       {showForm ?
         <Editor onPostSubmit={this.postSubmission} /> :
         '' }
