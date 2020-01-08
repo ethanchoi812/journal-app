@@ -19,6 +19,9 @@ class Post extends React.Component {
 
     handleSubmission(post){
         this.props.onPostEdit(post);
+        this.setState({
+            isEditOn: !this.state.isEditOn
+        });
     }
 
     render() {
