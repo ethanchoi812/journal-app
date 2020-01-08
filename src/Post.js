@@ -18,9 +18,7 @@ class Post extends React.Component {
     }
 
     handleSubmission(post){
-
         this.props.onPostEdit(post);
-
     }
 
     render() {
