@@ -11,6 +11,7 @@ class Editor extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
         this.handleClose = this.handleClose.bind(this);
     }
 
@@ -60,11 +61,20 @@ class Editor extends React.Component {
         event.preventDefault();
     }
 
+    handleDelete(event) {
+        let postId = this.state.id
+
+        if (postId !== 'unset') {
+            this.props.onPostDelete(postId);
+        }
+    }
+
     handleClose(event) {
         this.props.onClickClose();
     }
 
     render(){
+        const postId = this.state.id;
 
         return(
             <form className="Editor" onSubmit={this.handleSubmit} >
@@ -82,6 +92,9 @@ class Editor extends React.Component {
                 <div>
                     <input type="submit" value="Publish" />
                     <span className="Close-editor" onClick={this.handleClose}>Close</span>
+                    {postId !== 'unset' ?
+                        <span className="Delete-button" onClick={this.handleDelete}>Delete</span>
+                        : ''}
                 </div>
             </form>
         )

@@ -15,6 +15,7 @@ class App extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.postSubmission = this.postSubmission.bind(this);
     this.postEdit = this.postEdit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
     this.clickClose = this.clickClose.bind(this);
   }
 
@@ -52,6 +53,16 @@ class App extends React.Component {
     });
   }
 
+  handleDelete(postId){
+    let allposts = this.state.posts;
+
+    allposts.splice(postId, 1);
+
+    this.setState({
+      posts: allposts,
+    });
+ }
+
   clickClose() {
     this.setState({
       showForm: !this.state.showForm
@@ -68,6 +79,7 @@ class App extends React.Component {
         id={post.id}
         post={post}
         onPostEdit={this.postEdit}
+        onDeletePost={this.handleDelete}
         />
     );
   
@@ -81,7 +93,8 @@ class App extends React.Component {
       {showForm ?
         <Editor 
         onPostSubmit={this.postSubmission} 
-        onClickClose={this.clickClose}/> :
+        onClickClose={this.clickClose}
+        /> :
         '' }
       <div className="Blog">
         {content}

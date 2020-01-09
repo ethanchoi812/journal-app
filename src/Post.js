@@ -9,6 +9,7 @@ class Post extends React.Component {
 
         this.handleClick = this.handleClick.bind(this);
         this.handleSubmission = this.handleSubmission.bind(this);
+        this.deletePost = this.deletePost.bind(this);
         this.clickClose = this.clickClose.bind(this);
     }
 
@@ -31,6 +32,13 @@ class Post extends React.Component {
         }));
     }
 
+    deletePost(postId){
+        this.props.onDeletePost(postId);
+        this.setState(state => ({
+            isEditOn: !state.isEditOn
+        }));
+    }
+
     render() {
 
         const post = this.props.post;
@@ -43,6 +51,7 @@ class Post extends React.Component {
                     post={post}
                     onPostSubmit={this.handleSubmission}
                     onClickClose={this.clickClose}
+                    onPostDelete={this.deletePost}
                  /> :
             (
             <div>

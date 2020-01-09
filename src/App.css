@@ -70,9 +70,13 @@
   cursor: pointer;
 }
 
-.Close-editor {
+.Delete-button, .Close-editor {
   display: inline-block;
   text-decoration: underline;
   cursor: pointer;
   margin-left: 25px;
+}
+
+.Delete-button {
+  color: rgb(142, 0, 0);
 }
