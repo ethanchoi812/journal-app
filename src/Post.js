@@ -9,9 +9,10 @@ class Post extends React.Component {
 
         this.handleClick = this.handleClick.bind(this);
         this.handleSubmission = this.handleSubmission.bind(this);
+        this.clickClose = this.clickClose.bind(this);
     }
 
-    handleClick(e) {
+    handleClick(event) {
         this.setState(state => ({
             isEditOn: !state.isEditOn
         }));
@@ -24,6 +25,12 @@ class Post extends React.Component {
         });
     }
 
+    clickClose() {
+        this.setState(state => ({
+            isEditOn: !state.isEditOn
+        }));
+    }
+
     render() {
 
         const post = this.props.post;
@@ -31,7 +38,12 @@ class Post extends React.Component {
 
         return (
         <div className="Post-div">
-                {editOn ? <Editor post={post} onPostSubmit={this.handleSubmission} /> :
+                {editOn ? 
+                <Editor 
+                    post={post}
+                    onPostSubmit={this.handleSubmission}
+                    onClickClose={this.clickClose}
+                 /> :
             (
             <div>
                 <h1 className="Title">{post.title}</h1>

@@ -9,12 +9,13 @@ class App extends React.Component {
     super(props);
     this.state = {
       posts: [],
-      //showForm: false
+      showForm: false
     };
 
     this.handleClick = this.handleClick.bind(this);
     this.postSubmission = this.postSubmission.bind(this);
     this.postEdit = this.postEdit.bind(this);
+    this.clickClose = this.clickClose.bind(this);
   }
 
 
@@ -51,6 +52,12 @@ class App extends React.Component {
     });
   }
 
+  clickClose() {
+    this.setState({
+      showForm: !this.state.showForm
+    });
+  }
+
   render() {
 
     const showForm = this.state.showForm;
@@ -72,7 +79,9 @@ class App extends React.Component {
         <button className="New-post-button" onClick={this.handleClick}>+ New Post</button>
       </header>
       {showForm ?
-        <Editor onPostSubmit={this.postSubmission} /> :
+        <Editor 
+        onPostSubmit={this.postSubmission} 
+        onClickClose={this.clickClose}/> :
         '' }
       <div className="Blog">
         {content}

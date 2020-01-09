@@ -11,6 +11,7 @@ class Editor extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleClose = this.handleClose.bind(this);
     }
 
     componentDidMount() {
@@ -59,6 +60,10 @@ class Editor extends React.Component {
         event.preventDefault();
     }
 
+    handleClose(event) {
+        this.props.onClickClose();
+    }
+
     render(){
 
         return(
@@ -74,7 +79,10 @@ class Editor extends React.Component {
                     className="Content-editor" 
                     value={this.state.content} 
                     onChange={this.handleChange} />
-                <input type="submit" value="Publish" />
+                <div>
+                    <input type="submit" value="Publish" />
+                    <span className="Close-editor" onClick={this.handleClose}>Close</span>
+                </div>
             </form>
         )
     }
