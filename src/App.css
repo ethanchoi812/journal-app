@@ -61,14 +61,14 @@
 }
 
 .Blog {
-  padding-top: 60px;
-  padding-left: 100px;
+  padding: 60px 100px;
 }
 
 .Post-div {
   text-align: left;
   margin-bottom: 100px;
 }
+
 
 .Post-content p {
   white-space: pre-wrap;
