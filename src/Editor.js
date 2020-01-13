@@ -1,4 +1,7 @@
 import React from 'react';
+import { init } from 'pell';
+
+import 'pell/dist/pell.css';
 
 class Editor extends React.Component {
     constructor(props) {
@@ -6,7 +9,8 @@ class Editor extends React.Component {
         this.state = {
             title: '',
             content: '',
-            id: 'unset',
+            html: null,
+            id: null,
          };
 
         this.handleChange = this.handleChange.bind(this);
@@ -18,6 +22,7 @@ class Editor extends React.Component {
     componentDidMount() {
         let title = this.state.title;
         let content = this.state.content;
+        let html = this.state.html;
         let id = this.state.id;
 
         if (this.props.post) {
@@ -27,10 +32,16 @@ class Editor extends React.Component {
 
             this.setState({
                 title: title,
-                content: content,
+                html: html,
                 id: id
             });
         }
+
+        this.editor = init({
+            element: document.getElementById('content-editor'),
+            onChange: content => this.setState({ content }),
+            actions: ['bold', 'underline', 'italic'],
+        })
     }
 
     handleChange(event) {
@@ -55,7 +66,7 @@ class Editor extends React.Component {
         this.setState({
             title: '',
             content: '',
-            id: 'unset'
+            id: null
         });
 
         event.preventDefault();
@@ -64,7 +75,7 @@ class Editor extends React.Component {
     handleDelete(event) {
         let postId = this.state.id
 
-        if (postId !== 'unset') {
+        if (postId !== null) {
             this.props.onPostDelete(postId);
         }
     }
@@ -84,11 +95,13 @@ class Editor extends React.Component {
                     type="text"
                     value={this.state.title}
                     onChange={this.handleChange} />
-                <textarea 
+                <div 
                     name="content"
-                    className="Content-editor" 
+                    id="content-editor"
+                    className="Content-editor"
                     value={this.state.content} 
-                    onChange={this.handleChange} />
+                    />
+                <div id="html-output"></div>
                 <div>
                     <input type="submit" value="Publish" />
                     <span className="Close-editor" onClick={this.handleClose}>Close</span>

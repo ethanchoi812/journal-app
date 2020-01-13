@@ -60,7 +60,7 @@ class Post extends React.Component {
                     <span className="Date">{post.date}</span>
                 </div>
                 <div className="Post-content">
-                    <p>{post.content}</p>
+                    {post.content}
                 </div> 
             </div>
             ) }
